@@ -1,0 +1,77 @@
+* {
+	font-family: arial;
+}
+#fundtransferheader{
+background:white;
+font:40px arial;
+color:#003300;
+text-align:center;
+margin:auto;
+margin-top:10px;
+margin-bottom:35px;
+font-weight:bold;
+letter-spacing: -1px;
+}
+#fundtransfer{
+background:white;
+width:200px;
+margin:auto;
+}
+#fundtransfer li {
+list-style:none;
+}
+#fundtransfer li a{
+width:180px;
+text-align:center;
+display: block;
+text-decoration:none;
+padding:10px;
+background:white;
+font-family: arial;
+color:black;
+font-weight:bold;
+}
+
+#fundtransfer li a:hover {
+background:#006666;
+color:white;
+border-radius:5px;
+}
+
+#fundtransfer li a:active {
+color:#003366;
+}
+#displaycenter{
+	margin-top:30px;
+	width:800px;
+	margin:auto;
+	text-align:left;
+}
+#displaycenter1{
+	margin-top:30px;
+	width:400px;
+	margin:auto;
+	text-align:left;
+}
+#submit {
+	background:#006666;
+	padding:10px 30px;
+	font-weight:bold;
+	letter-spacing:1px;
+	font: 16px arial;
+	color:white;
+	border-radius:7px;
+	float:right;
+	margin-bottom:20px;
+}
+#submit:hover {
+	color:red;
+	background:#003333;
+}
+
+.input{
+	font-family: arial;
+	font-size: 16px;
+	border:solid 1px #003366;
+	padding: 5px;
+}

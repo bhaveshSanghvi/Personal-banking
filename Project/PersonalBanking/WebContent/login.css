@@ -1,0 +1,56 @@
+#unl {
+			font-family: arial;
+			font-size: 20px;
+			font-weight: bold;
+			margin-right: 13px;
+		}
+		#pwdl {
+			font-family: arial;
+			font-size: 20px;
+			font-weight: bold;
+			margin-right: 15px;
+		}
+		#username, #password {
+			font-family: arial;
+			font-size: 20px;
+			border:solid 1px red;
+			padding: 5px;
+		}
+
+
+		#login{
+			padding:7px 10px;
+			background: #666;
+			color: white;
+			border: none;	
+			font-weight: bold;
+			float: right;
+			margin-top: 10px;
+			width: 100px;
+		}
+		#login:hover {
+			color: red;
+			background: black;
+		}
+		#login_wrapper {
+			/*position: absolute;*/
+			width: 430px;
+			height: 220px;
+			background: white;
+			top:20%;
+			left:35%;
+			padding: 10px;
+			margin:10px auto;
+
+		}
+		#content {
+			padding: 10px;
+			background: white;
+			width: 372px;
+			position: relative;
+			top: 20px;
+			left:18px;
+		}
+		#content p {
+			clear:both;
+		}

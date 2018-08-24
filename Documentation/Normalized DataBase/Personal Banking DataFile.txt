@@ -1,0 +1,207 @@
+Create table User1(UserID varchar2(20) not null, Password Varchar2(10) not null, UserType Varchar2(10),constraint User1_Primary_Key Primary Key (UserID));
+
+
+Create table ForgotLogin (
+EmailID varchar2(30) Primary Key,
+Question Varchar2(50) not null,
+Answer Varchar2(30) not null );
+
+
+Create table Customer ( 
+CustomerID Number(5) Primary Key, 
+UserID varchar2(20) REFERENCES User1(UserID),
+CustomerName Varchar2(25) not null,
+CustomerDOB varchar2(20),
+CustomerGender Varchar2(10),
+CustomerEmailID Varchar2(30) REFERENCES ForgotLogin(EmailID),
+CustomerAadharCardNo Number(10) not null unique,
+CustomerPANCardNo varchar2(10) not null unique,
+CustomerMobileNo varchar2(12) not null unique );
+
+
+Create table Address (
+CustomerID Number(5) references Customer(CustomerID),
+AddressFlatNo Varchar2(5) not null,
+AddressStreet Varchar2(20) not null,
+AddressCity Varchar2(20) not null,
+AddressState Varchar2(20) not null,
+AddressPin Varchar2(7) not null );
+
+
+Create table AccountCreationRequest(
+accountCreationRequestId number(5) primary key,
+CustomerID Number(5) references Customer(CustomerID) );
+
+
+Create table Transaction(TransactionID Number(5) Primary Key, FromAccountNo Number(12) not null, ToAccountNo Number(12) not null, FromBank Varchar2(20) not null, ToBank Varchar2(20) not null, Amount Number(9,2) not null, DateAndTime varchar2(30));
+
+
+Create table TempFundTransfer (
+FundTransferRequestID Number(5) Primary Key,
+TransactionID Number(5) references Transaction
+(TransactionID),
+FromAccountNo Number(12) not null,
+ToAccountNo Number(12) not null,
+FromBank Varchar2(20) not null,
+ToBank Varchar2(20) not null,
+Amount Number(9,2) not null,
+DateAndTime varchar2(30));
+
+
+Create table Branch (
+BranchIFSC Number(4) Primary Key,
+BranchLocation Varchar2(25),
+BankName Varchar2(25));
+
+
+Create table Account (
+AccountNo Number(12) Primary Key,
+CustomerID Number(5) references Customer(CustomerID),
+AccountBalance Number(9,2) not null,
+AccountType Varchar2(10),
+BankIFSC number(4) references Branch(BranchIFSC),
+AccountStatus Varchar2(10) default 'active')
+
+
+Create table Application( 
+ApplicantID Number(5) Primary Key, 
+ApplicantName Varchar2(25) not null,
+ApplicantDOB varchar2(20),
+ApplicantGender Varchar2(10),
+ApplicantEmailID Varchar2(30),
+ApplicantAadharCardNo Number(10) not null unique,
+ApplicantPANCardNo Number(10) not null unique,
+ApplicantMobileNo Number(12) not null unique,
+ApplicantAddressFlatNo Number(4) not null,
+ApplicantAddressStreet Varchar2(20) not null,
+ApplicantAddressCity Varchar2(20) not null,
+ApplicantAddressState Varchar2(20) not null,
+ApplicantAddressPin Number(6) not null);
+
+
+Create table Beneficiary (
+BeneficiaryAccountNo Number(12) Primary Key,
+BeneficiaryName Varchar2(25) not null,
+BeneficiaryBankName Varchar2(25) not null,
+BeneficiaryBankIFSC Number(4) references Branch(BranchIFSC),
+CustomerID Number(5) references Customer(CustomerID));
+
+
+Create table Bank (
+BankName Varchar2(25) not null,
+BankNoOfBranches Number(2) );
+
+
+Create table BeneficiaryAccount (
+baccountno number(12),
+balance number(9,2));
+
+
+select * from User1
+select * from ForgotLogin
+select * from Customer
+select * from Address
+select * from Transaction
+select * from tempfundtransfer
+select * from Branch
+select * from Account
+select * from Application
+select * from Beneficiary
+select * from Bank
+select * from BeneficiaryAccount
+
+insert into User1 values ('admin','admin123','admin')
+insert into User1 values ('user1','user123','user')
+insert into User1 values ('user2','user123','user')
+insert into User1 values ('user3','user123','user')
+
+
+insert into ForgotLogin values('arpit@hitech.com','what is your favourite color? ','red')
+insert into ForgotLogin values('snehal@hitech.com','what is your favourite color? ','pink')insert into ForgotLogin values('yoga@hitech.com','what is your favourite color? ','blue')
+
+
+insert into Customer values (25001,'user1','arpit','1/1/1994','male','arpit@hitech.com','123456789','abcd12345e','9768654321')
+insert into Customer values (25002,'user2','snehal','2/2/1994','female','snehal@hitech.com','234567891','abcd23456e','8765432190')
+insert into Customer values (25003,'user3','yoga','3/3/1994','female','yoga@hitech.com','345678912','abcd34567e','9768356573')
+
+
+insert into Address values(25001,'123','mg road','mumbai','maharashtra','400001')
+insert into Address values(25001,'233','sv raod','pune','maharashtra','402323')
+insert into Address values(25002,'534','fs road','mumbai','maharashtra','400232')
+insert into Address values(25003,'634','link road','mumbai','maharashtra','400101')
+
+
+insert into Bank values('hitech',1)
+insert into Bank values('hdfc',2)
+insert into Bank values('axis',1)
+
+
+insert into Branch values(1001,'mahape','hitech')
+insert into Branch values(2002,'pune','hdfc')
+insert into Branch values(3003,'vashi','hdfc')
+insert into Branch values(4004,'dadar','axis')
+
+
+insert into Account (AccountNo,CustomerID,AccountBalance,AccountType,BankIFSC) values(123456789012,25001,10000.0,'saving',1001)
+insert into Account values(123456789013,25001,1000.00,'savings',1001,'active')
+insert into Account values(123456789014,25002,10000.00,'savings',1001,'active')
+insert into Account values(123456789015,25003,10000.00,'savings',1001,'active')
+insert into Account values(123456789016,25003,1000.00,'savings',1001,'active')
+insert into Account values(123456789017,25003,0.00,'savings',1001,'active')
+
+
+insert into Beneficiary values(987645342112,'aakash','hdfc',2002,25001)
+insert into Beneficiary values(147852342882,'Bhavesh','axis',4004,25001)
+insert into Beneficiary values(369852141596,'Swati','hdfc',3003,25001)
+insert into Beneficiary values(987645342145,'chimau','hdfc',2002,25003)
+insert into Beneficiary values(147852342859,'mani','axis',4004,25003)
+
+
+insert into BeneficiaryAccount values(987645342112,1000)
+insert into BeneficiaryAccount values(147852342882,2000)
+insert into BeneficiaryAccount values(369852141596,3000)
+insert into BeneficiaryAccount values(987645342145,4000)
+insert into BeneficiaryAccount values(147852342859,5000)
+
+
+insert into Transaction values(101,123456789012,123456789013,'hitech','hitech',5000.00,'10/01/2015 11:53:53')
+insert into Transaction values(102,123456789012,123456789014,'hitech','hitech',1000.00,'10/02/2015 11:53:53')
+
+insert into Transaction values(103,123456789012,987645342112,'hitech','hdfc',2000.00,'10/03/2015 11:53:53')
+
+insert into Transaction values(105,123456789013,123456789017,'hitech','hitech',3000.00,'10/05/2015 11:53:53')
+insert into Transaction values(106,123456789015,123456789012,'hitech','hitech',8000.00,'10/06/2015 11:53:53')
+insert into Transaction values(107,123456789015,123456789014,'hitech','hitech',7000.00,'10/07/2015 11:53:53')
+insert into Transaction values(108,123456789015,987645342145,'hitech','hdfc',5000.00,'10/08/2015 11:53:53')
+insert into Transaction values(109,123456789015,147852342859,'hitech','axis',4000.00,'10/09/2015 11:53:53')
+insert into Transaction values(110,123456789015,123456789016,'hitech','hitech',9000.00,'10/10/2015 11:53:53')
+
+
+CREATE SEQUENCE FundTransferRequestID
+INCREMENT BY 1
+START WITH 55000
+NOCACHE;
+
+
+CREATE SEQUENCE AccountDeletionRequestID
+INCREMENT BY 1
+START WITH 75000
+NOCACHE;
+
+
+CREATE SEQUENCE TransactionID
+INCREMENT BY 1
+START WITH 111
+NOCACHE;
+
+
+CREATE SEQUENCE ApplicantID
+INCREMENT BY 1
+START WITH 15000
+NOCACHE;
+
+
+CREATE SEQUENCE CustomerID
+INCREMENT BY 1
+START WITH 25000
+NOCACHE;
